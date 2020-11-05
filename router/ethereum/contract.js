@@ -1,7 +1,7 @@
 const Web3 = require("web3");
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-const address = "0xa6BE1442D4aD01770A0Ac9253488FDe9a17b35e2";
+const address = "0xcc36a3e7ae7c6333D599C0200e7C1a5bA9Bec88A";
 
 const abi =[
 	{
