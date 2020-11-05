@@ -2,18 +2,49 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 
+router.post('/login', (req, res)=>{
+  User.findOne({ sender : req.body.txAddress }, (err, result) => {
+    if (err) {
+
+      res.status(500).send('error')
+    } else if (!result) {
+      res.status(401).json({message : ""})
+    } else {
+      res.status(200).json({message : ""})
+    }
+  })
+})
+
 // 유저 정보 입력
 router.post("/enroll", (req, res) => {
-  const user = new User(req.body);
+  console.log(req.body)
+  User.findOne( {sender : req.body.sender }, (err, result) =>{
+    if (result && result.sender){
+      // update
+      User.updateOne({sender: req.body.sender}, req.body,(err, result)=>{
+        if(err){
+          res.status(500).send("server error")
+        }
+        else{
+          res.status(200).send("edit")
+        }
+      })
 
-  user.save((err) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Error sigup new user please try again");
     } else {
-      res.status(200).send("Success");
+      // create
+      const user = new User(req.body);
+      user.save((err) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Error sigup new user please try again");
+        } else {
+          res.status(200).send("Success");
+        }
+      });
     }
-  });
+  })
+  
+
 });
 
 // 회원 수정

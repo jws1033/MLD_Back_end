@@ -1,7 +1,7 @@
 const Web3 = require("web3");
-const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-const address = "0x96491D2d347A7c07e2C08BEd8a7AF1a4Ad8FdC2f";
+const address = "0xa6BE1442D4aD01770A0Ac9253488FDe9a17b35e2";
 
 const abi =[
 	{
@@ -9,7 +9,7 @@ const abi =[
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "owner",
+				"name": "sender",
 				"type": "address"
 			}
 		],
@@ -23,8 +23,13 @@ const abi =[
 						"type": "string"
 					},
 					{
-						"internalType": "string[]",
+						"internalType": "string",
 						"name": "surveyNum",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "surveyQuestion",
 						"type": "string[]"
 					},
 					{
@@ -47,7 +52,7 @@ const abi =[
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "owner",
+				"name": "sender",
 				"type": "address"
 			},
 			{
@@ -56,8 +61,13 @@ const abi =[
 				"type": "string"
 			},
 			{
-				"internalType": "string[]",
+				"internalType": "string",
 				"name": "surveyNum",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "surveyQuestion",
 				"type": "string[]"
 			},
 			{

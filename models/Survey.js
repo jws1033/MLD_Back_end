@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const surveySchema =  new Schema({
     no : {
-      type:Number,
+      type: String,
       require: true,
     },
   

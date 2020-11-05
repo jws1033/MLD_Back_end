@@ -9,32 +9,26 @@ const userSchema = new Schema({
 
   name: {
     type: String,
-    required: true,
   },
 
   gender: {
     type: String,
-    required: true,
   },
 
   age: {
-    type: Number,
-    required: true,
+    type: String,
   },
 
   residence: {
     type: String,
-    required: true,
   },
 
   height: {
-    type: Number,
-    required: true,
+    type: String,
   },
 
   weight: {
-    type: Number, 
-    required: true,
+    type: String, 
   },
 });
 

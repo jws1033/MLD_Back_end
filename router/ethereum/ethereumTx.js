@@ -12,10 +12,10 @@ const ethereumTx = {
       console.error(e)
     });
   },
-
+  
   invoke : (request) => {
-    return contract.methods.saveSurvey(request.sender, request.createAt, request.surveyNum, request.surveyResult)
-    .send({from: request.sender, gas:300000, gasPrice:"30000"})
+    return contract.methods.saveSurvey(request.sender, request.createAt, request.surveyNum, request.surveyQuestion, request.surveyResult)
+    .send({from: request.sender, gas:3000000, gasPrice:"300000"})
     .then((res) => {
       return res
     }).catch(e=>{

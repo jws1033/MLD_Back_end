@@ -3,7 +3,7 @@ var router = require('express').Router()
 const userRouter = require('./userRouter')
 const surveyRouter = require('./surveyRouter')
 
-router.use('/api/user', userRouter)
-router.use('/api/survey', surveyRouter)
+router.use('/user', userRouter)
+router.use('/survey', surveyRouter)
 
 module.exports = router;

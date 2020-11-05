@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopolo
 })
 
 //Add Routing File List on Middleware
-app.use('/', apiRouter)
+app.use('/api', apiRouter)
 
 //Start Server
 PORT=process.env.PORT
