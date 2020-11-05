@@ -18,8 +18,6 @@ router.get("/surveyfind", async(req, res) => {
 router.post("/submit", async(req, res) => {
   req.body.createAt = new Date().toISOString().substring(0, 10)
   
-  console.log(req.body) 
-
   // request.sender, request.createAt, request.surveyNum, request.surveyQuestion, request.surveyResult
   const result = await ethereumTx.invoke(req.body)
 
@@ -49,15 +47,20 @@ router.post("/create", (req, res) => {
 
 //질문 불러오기
 router.get("/load", (req, res) => {
-    console.log(req.query)
-    Survey.findOne({ no : req.query.no }, { _id: 0, __v: 0 }, (err, result) => {
+    Survey.find({}, (err, result) => {
       if (err) {
         console.log(err)
         res.status(500).json({ message: "Find False" })
       } else if (!result) {
         res.status(401).json({ message: "질문이 존재하지 않습니다." })
       } else {
-        res.status(200).json(result)
+        // Mongoose공부. 
+        // JS공부
+
+        // express.js Mongoose
+        const idx = Math.floor(Math.random() * (result.length))
+        
+        res.status(200).json(result[idx])
       }
     })
   })

@@ -8,9 +8,9 @@ router.post('/login', (req, res)=>{
 
       res.status(500).send('error')
     } else if (!result) {
-      res.status(401).json({message : ""})
+      res.status(401).json({message : "없음"})
     } else {
-      res.status(200).json({message : ""})
+      res.status(200).json({message : "성공"})
     }
   })
 })
@@ -76,13 +76,16 @@ router.get("/userfind", (req, res) => {
 })
 
 // 회원 탈퇴
-router.post("/withdrawal", (req, res) => {
-  User.deleteOne({ sender : req.body.sender }, (err) => {
-    if (err) {
-      console.log(err)
-      res.status(500).json({ error: "서버에러" })
-    }
+router.post("/withdrawal", async(req, res) => {
+  await User.deleteOne({ sender : req.body.sender }, (err, result) => {
+    if(err) {
+        console.log(err)
+        res.status(500).json({error : 'Internal error please try again'})
+    } else if(!result) {
+        res.status(401).json({message : 'This user not exist.'}) 
+    } else{
     res.status(200).json({ message: "삭제 성공" })
+    }
   })
 })
 
