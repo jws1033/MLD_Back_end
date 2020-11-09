@@ -5,7 +5,7 @@ const User = require("../models/User");
 router.post('/login', (req, res)=>{
   User.findOne({ sender : req.body.txAddress }, (err, result) => {
     if (err) {
-
+      console.log(err)
       res.status(500).send('error')
     } else if (!result) {
       res.status(401).json({message : "없음"})
@@ -17,10 +17,8 @@ router.post('/login', (req, res)=>{
 
 // 유저 정보 입력
 router.post("/enroll", (req, res) => {
-  console.log(req.body)
   User.findOne( {sender : req.body.sender }, (err, result) =>{
     if (result && result.sender){
-      // update
       User.updateOne({sender: req.body.sender}, req.body,(err, result)=>{
         if(err){
           res.status(500).send("server error")
@@ -31,8 +29,8 @@ router.post("/enroll", (req, res) => {
       })
 
     } else {
-      // create
       const user = new User(req.body);
+
       user.save((err) => {
         if (err) {
           console.log(err);
@@ -43,8 +41,6 @@ router.post("/enroll", (req, res) => {
       });
     }
   })
-  
-
 });
 
 // 회원 수정
@@ -76,15 +72,15 @@ router.get("/userfind", (req, res) => {
 })
 
 // 회원 탈퇴
-router.post("/withdrawal", async(req, res) => {
-  await User.deleteOne({ sender : req.body.sender }, (err, result) => {
+router.post("/withdrawal", (req, res) => {
+  User.deleteOne({ sender : req.body.sender }, (err, result) => {
     if(err) {
-        console.log(err)
-        res.status(500).json({error : 'Internal error please try again'})
+      console.log(err)
+      res.status(500).json({error : 'Internal error please try again'})
     } else if(!result) {
-        res.status(401).json({message : 'This user not exist.'}) 
-    } else{
-    res.status(200).json({ message: "삭제 성공" })
+      res.status(401).json({message : 'This user not exist.'}) 
+    } else {
+      res.status(200).json({ message: "삭제 성공" })
     }
   })
 })

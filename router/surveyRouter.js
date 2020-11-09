@@ -41,11 +41,7 @@ router.get("/surveylist", async(req, res) => {
 router.post("/submit", async(req, res) => {
   req.body.createAt = new Date().toISOString().substring(0, 10)
   
-  // request.sender, request.createAt, request.surveyNum, request.surveyQuestion, request.surveyResult
   const result = await ethereumTx.invoke(req.body)
-
-  // req.body.surveyResult
-  console.log(result)
 
   if(result) {
       res.status(200).json({result : "", message : "Success"})
@@ -77,10 +73,6 @@ router.get("/load", (req, res) => {
       } else if (!result) {
         res.status(401).json({ message: "질문이 존재하지 않습니다." })
       } else {
-        // Mongoose공부. 
-        // JS공부
-
-        // express.js Mongoose
         const idx = Math.floor(Math.random() * (result.length))
         
         res.status(200).json(result[idx])
