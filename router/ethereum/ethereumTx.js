@@ -6,7 +6,12 @@ const ethereumTx = {
      from: request.sender
     })
     .then((res) => {
-      return res;
+      console.log(res)
+      if(res.length === 0) {
+        return false
+      } else {
+        return res;
+      }
     }).catch(e=>{
       console.log("Error 발생")
       console.error(e)

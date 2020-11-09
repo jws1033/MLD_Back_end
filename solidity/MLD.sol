@@ -1,4 +1,3 @@
-  
 pragma solidity ^0.5.0;
 
 // experimental
@@ -18,7 +17,7 @@ contract myLittleDoctor {
 
     // address owner;
     mapping(address => research) private researchs;
-    
+
     function saveSurvey(
         address sender,
         string memory createAt,
@@ -35,11 +34,7 @@ contract myLittleDoctor {
         researchs[sender].surveys.push(newServey);
     }
 
-    function querySurvey(address sender)
-        public
-        view
-        returns (survey[] memory)
-    {
+    function querySurvey(address sender) public view returns (survey[] memory) {
         return researchs[sender].surveys;
     }
 }
